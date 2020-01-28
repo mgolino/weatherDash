@@ -54,7 +54,7 @@
         <label for="sTerm">Zip Code</label><br>
         <input type="text" id="sTerm"><br><br>
         <br><button type="submit" id="searchWeather">Search Now</button>
-
+       
     </form>
 
     <script type="text/javascript">
@@ -84,7 +84,8 @@
 
 // // Log the resulting object
 // console.log(response);
-
+getCity();
+getTemp();
     });
 
   function getCity(){
@@ -93,7 +94,6 @@
   }
 
   function getTemp() {
-   
   var myTemp = localStorage.getItem("Temperature");
   var tempF = (myTemp - 273.15) * 1.80 + 32;
   var a = parseInt(tempF);
@@ -102,8 +102,15 @@
   
          
 }
-getCity();
-getTemp();
+// getCity();
+// getTemp();
+
+// clearStor(); 
+
+// function clearStor(){
+//     localStorage.clear();
+// }
+   
 
 });   
     
