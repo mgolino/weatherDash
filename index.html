@@ -10,26 +10,45 @@
     h1 {
       display: block;
       margin-top: 50px;
-      margin-left: 400px;
-      margin-right: 0;
+      /* margin-left: 50px;
+      margin-right: 0; */
     }
     h2 {
       display: block;
       margin-top: 50px;
-      margin-left: 400px;
-      margin-right: 0;
+      /* margin-left: 400px;
+      margin-right: 0; */
+    }
+    .mainDiv{
+        background-color: lightskyblue;
+        /* padding-left: 25%;
+        padding-right: 25%; */
+        margin-left: 25%;
+        margin-right: 25%;
+        
+    }
+    .mainForm{
+        background-color: lightslategray;
+        margin-left: 25%;
+        float: left;
+        padding-left: 100px;
+        padding-top: 100px;
+        padding-right: 100px;
+        padding-bottom: 100px;
     }
     </style>
 <body>
     
+    <div class="mainDiv">
     
-    <h1 id="theCity"></h1>
+    <h1>The Weather in </h1><h1 id="theCity"></h1>
     <h2 id="theTemp"></h2>
-    
+    </div>
+
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
 
-    <form>
+    <form class="mainForm">
         <label for="sTerm">Zip Code</label><br>
         <input type="text" id="sTerm"><br><br>
         <br><button type="submit" id="searchWeather">Search Now</button>
