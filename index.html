@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    h1 {
+      display: block;
+      margin-top: 50px;
+      margin-left: 400px;
+      margin-right: 0;
+    }
+    h2 {
+      display: block;
+      margin-top: 50px;
+      margin-left: 400px;
+      margin-right: 0;
+    }
+    </style>
+<body>
+    
+    
+    <h1 id="theCity"></h1>
+    <h2 id="theTemp"></h2>
+    
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+
+    <form>
+        <label for="sTerm">Zip Code</label><br>
+        <input type="text" id="sTerm"><br><br>
+        <br><button type="submit" id="searchWeather">Search Now</button>
+
+    </form>
+
+    <script type="text/javascript">
+    $(searchWeather).on("click", function(event){
+    event.preventDefault();
+    var zipCode = $("#sTerm").val();
+    // var zipCode ="32771";
+   var city=$(this).attr("city.name");
+    var APIKey = "73310b5faf4ada3a2aad465913f033e9";
+    var queryURL = "http://api.openweathermap.org/data/2.5/forecast?zip=" + zipCode + "&APPID=" + APIKey;
+
+
+        $.ajax({
+            url:queryURL,
+            method:"GET"
+        })
+
+        .then(function(response) {
+         
+            localStorage.setItem("City", response.city.name);
+            localStorage.setItem("Temperature", response.list[0].main.temp);
+            
+            // var myTemp=localStorage.getItem("Temperature", response.list[0].main.temp);
+
+// Log the queryURL
+// console.log(queryURL);
+
+// // Log the resulting object
+// console.log(response);
+
+    });
+
+  function getCity(){
+    var myCity = localStorage.getItem("City");
+  document.getElementById("theCity").innerHTML = myCity;
+  }
+
+  function getTemp() {
+   
+  var myTemp = localStorage.getItem("Temperature");
+  var tempF = (myTemp - 273.15) * 1.80 + 32;
+  var a = parseInt(tempF);
+  console.log(a);
+  document.getElementById("theTemp").innerHTML = a;  
+  
+         
+}
+getCity();
+getTemp();
+
+});   
+    
+    
+    </script>
+</body>
+</html>
