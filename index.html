@@ -4,66 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="styles.css">
     <title>Document</title>
 </head>
-<style>
-    h1 {
-      display: block;
-      margin-top: 50px;
-      margin-left: 100px;
-      /* margin-right: 0; */ 
-    }
-    h2 {
-      display: block;
-      margin-top: 50px;
-      margin-left: 100px;
-      /* margin-right: 0; */
-    }
-    .mainDiv{
-        background-color: lightskyblue;
-        /* padding-left: 25%;
-        padding-right: 25%; */
-        margin-left: 25%;
-        margin-right: 25%;
-        border-radius: 25px;
-    }
-    .mainForm{
-        background-color: lightslategray;
-        margin-left: 25%;
-        float: left;
-        padding-left: 100px;
-        padding-top: 100px;
-        padding-right: 100px;
-        padding-bottom: 100px;
-        border-radius: 25px;
-    }
-    </style>
-<body>
-    
-    <div class="mainDiv">
-    <h1>The Weather in <span id="theCity"></span></h1>
-    <!-- <h1>The Weather in </h1><h1 id="theCity"></h1> -->
-    <h2>is currently <span id="theTemp"></span> degrees!</h2>
 
-    <!-- </p> id="theTemp"></h2> -->
+<body>
+     <form class="mainForm">
+        <label for="sTerm">Please Enter a Zip Code</label><br><br>
+        <input type="text" id="sTerm"><br><br>
+        <br><button type="submit" id="searchWeather">Get My Weather</button>
+        <br><button type="submit" id="fiveDayForcast">Get My 5 Day Forcast!</button>
+    </form><br>
+
+    <div class="mainDiv">
+        <h1>The Weather in <span id="theCity"></span></h1>
+        <h2>is currently <span id="theTemp"></span> degrees!</h2>
+        <h2>Visibility:  <span id="theSky"></span></h2>
+        <!-- <h2>Date: <span id="theDate"></span></h2> -->
+    </div><br>
+
+    <div class="fiveDayDiv">
+        <h1>The Weather in <span id="theCity5"></span></h1>
+        <h2>is currently <span id="theTemp5"></span> degrees!</h2>
+        <h2>Visibility:  <span id="theSky5"></span></h2>
+        <h2>Date: <span id="theDate5"></span></h2>
     </div>
 
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+    <script src="moment.js"></script>
+   
 
-    <form class="mainForm">
-        <label for="sTerm">Please Enter a Zip Code</label><br><br>
-        <input type="text" id="sTerm"><br><br>
-        <br><button type="submit" id="searchWeather">Get My Weather</button>
-       
-    </form>
+<script type="text/javascript">
 
-    <script type="text/javascript">
     $(searchWeather).on("click", function(event){
     event.preventDefault();
     var zipCode = $("#sTerm").val();
-    // var zipCode ="32771";
-   var city=$(this).attr("city.name");
+    var city=$(this).attr("city.name");
     var APIKey = "73310b5faf4ada3a2aad465913f033e9";
     var queryURL = "http://api.openweathermap.org/data/2.5/forecast?zip=" + zipCode + "&APPID=" + APIKey;
 
@@ -77,44 +54,98 @@
          
             localStorage.setItem("City", response.city.name);
             localStorage.setItem("Temperature", response.list[0].main.temp);
+            localStorage.setItem("Skys", response.list[0].weather[0].description);
             
-            // var myTemp=localStorage.getItem("Temperature", response.list[0].main.temp);
 
-// Log the queryURL
-// console.log(queryURL);
-
-// // Log the resulting object
-// console.log(response);
 getCity();
 getTemp();
+getSky();
     });
-
-  function getCity(){
-    var myCity = localStorage.getItem("City");
-  document.getElementById("theCity").innerHTML = myCity;
-  }
-
-  function getTemp() {
-  var myTemp = localStorage.getItem("Temperature");
-  var tempF = (myTemp - 273.15) * 1.80 + 32;
-  var a = parseInt(tempF);
-  console.log(a);
-  document.getElementById("theTemp").innerHTML = a;  
-  
-         
-}
-// getCity();
-// getTemp();
-
-// clearStor(); 
-
-// function clearStor(){
-//     localStorage.clear();
-// }
-   
-
 });   
-    
+
+
+$("#fiveDayForcast").on("click", function(event){
+    event.preventDefault();
+    var zipCode = $("#sTerm").val();
+    var city=$(this).attr("city.name");
+    var APIKey = "73310b5faf4ada3a2aad465913f033e9";
+    var queryURL = "http://api.openweathermap.org/data/2.5/forecast?zip=" + zipCode + "&APPID=" + APIKey;
+
+
+        $.ajax({
+            url:queryURL,
+            method:"GET"
+        })
+
+        .then(function(response) {
+            for(var a = 0; a < 40; a++ ) {
+            localStorage.setItem("City", response.city.name);
+            localStorage.setItem("Temperature", response.list[0].main.temp);
+            localStorage.setItem("Skys", response.list[0].weather[0].description);
+            localStorage.setItem("DateTime", response.list[0].dt_txt);
+            var markDate = (response.list[a].dt);
+            var dateString = moment.unix(markDate).format("MM/DD/YYYY");
+            console.log(dateString);
+            console.log(response); 
+           
+            }
+            getCity5();
+            getTemp5();
+            getSky5();
+            getDate5();
+            
+            
+        });
+});
+
+
+// This is for the 5 day Div ONLY
+        function getCity5(){
+            var myCity = localStorage.getItem("City");
+            document.getElementById("theCity5").innerHTML = myCity;
+     }
+
+        function getTemp5() {
+            var myTemp = localStorage.getItem("Temperature");
+            var tempF = (myTemp - 273.15) * 1.80 + 32;
+            var a = parseInt(tempF);
+    //  console.log(a);
+            document.getElementById("theTemp5").innerHTML = a;       
+}
+        function getSky5(){
+            var mySky = localStorage.getItem("Skys");
+            document.getElementById("theSky5").innerHTML = mySky;
+    }
+
+        function getDate5(){
+            var myDate = localStorage.getItem("DateTime");
+            document.getElementById("theDate5").innerHTML = myDate;
+            
+        }
+
+// Write to HTML Elements from Storage - One Day Dev
+        function getCity(){
+            var myCity = localStorage.getItem("City");
+            document.getElementById("theCity").innerHTML = myCity;
+     }
+
+        function getTemp() {
+            var myTemp = localStorage.getItem("Temperature");
+            var tempF = (myTemp - 273.15) * 1.80 + 32;
+            var a = parseInt(tempF);
+    //  console.log(a);
+            document.getElementById("theTemp").innerHTML = a;       
+}
+        function getSky(){
+            var mySky = localStorage.getItem("Skys");
+            document.getElementById("theSky").innerHTML = mySky;
+    }
+
+        function getDate(){
+            var myDate = localStorage.getItem("DateTime");
+            document.getElementById("theDate").innerHTML = myDate;
+        }      
+
     
     </script>
 </body>
