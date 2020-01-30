@@ -24,10 +24,18 @@
     </div><br>
 
     <div class="fiveDayDiv">
-        <h1>The Weather in <span id="theCity5"></span></h1>
-        <h2>is currently <span id="theTemp5"></span> degrees!</h2>
-        <h2>Visibility:  <span id="theSky5"></span></h2>
-        <h2>Date: <span id="theDate5"></span></h2>
+        <h1>The 5 Day Forecast in <span id="theCityDay1"></span></h1>
+        <h2>Date: <span id="theDateDay1"></span></h2>
+        <h2>is currently <span id="theTempDay1"></span> degrees!</h2>
+        <h2>Visibility:  <span id="theSkysDay1"></span></h2>
+        <h1>---------------------------------------</h1>
+        <h2>Date: <span id="theDateDay2"></span></h2>
+        <h2>is currently <span id="theTempDay2"></span> degrees!</h2>
+        <h2>Visibility:  <span id="theSkysDay2"></span></
+        <h1>---------------------------------------</h1>
+        <h2>Date: <span id="theDateDay2"></span></h2>
+        <h2>is currently <span id="theTempDay2"></span> degrees!</h2>
+        <h2>Visibility:  <span id="theSkysDay2"></span></
     </div>
 
     <script src="https://code.jquery.com/jquery.js"></script>
@@ -117,42 +125,73 @@ $("#fiveDayForcast").on("click", function(event){
             // console.log(myArrayDays);
                 
             }
-            getCity5();
-            getTemp5();
-            getSky5();
-            getDate5();
-            
+            // getCity5();
+            // getTemp5();
+            // getSky5();
+            // getDate5();
+            getDay();
+            getDay1();
+            // getDay2();
+            // getDay3();
+            // getDay4();
+
             
         });
         // var myArrayDays = [];
         //     myArrayDays.push(response.list[0], response.list[8], response.list[16], response.list[24], response.list[32]);
 });
 
-
-// This is for the 5 day Div ONLY
-        function getCity5(){
+        //Test 5 day elements here
+        function getDay() {
             var myCity = localStorage.getItem("City");
-            document.getElementById("theCity5").innerHTML = myCity;
-     }
-
-        function getTemp5() {
+            document.getElementById("theCityDay1").innerHTML = myCity;
             var myTemp = localStorage.getItem("Temperature");
             var tempF = (myTemp - 273.15) * 1.80 + 32;
             var a = parseInt(tempF);
-    //  console.log(a);
-            document.getElementById("theTemp5").innerHTML = a;       
-}
-        function getSky5(){
-            var mySky = localStorage.getItem("Skys");
-            document.getElementById("theSky5").innerHTML = mySky;
-    }
-
-        function getDate5(){
-            // var myDate = localStorage.getItem("dateString");
-           var myDate = (dateString);
-            document.getElementById("theDate5").innerHTML = myDate;
-           
+            document.getElementById("theTempDay1").innerHTML = a;
+            var mySkys = localStorage.getItem("Skys");
+            document.getElementById("theSkysDay1").innerHTML = mySkys;
+            var myDate = localStorage.getItem("DateTime");
+            document.getElementById("theDateDay1").innerHTML = myDate;
         }
+
+        function getDay1() {
+            // var myCity = localStorage.getItem("City");
+            // document.getElementById("theCityDay1").innerHTML = myCity;
+            var myTemp = localStorage.getItem("Temperature1");
+            var tempF = (myTemp - 273.15) * 1.80 + 32;
+            var a = parseInt(tempF);
+            document.getElementById("theTempDay2").innerHTML = a;
+            var mySkys = localStorage.getItem("Skys1");
+            document.getElementById("theSkysDay2").innerHTML = mySkys;
+            var myDate = localStorage.getItem("DateTime1");
+            document.getElementById("theDateDay2").innerHTML = myDate;
+        }
+
+// This is for the 5 day Div ONLY
+//         function getCity5(){
+//             var myCity = localStorage.getItem("City");
+//             document.getElementById("theCity5").innerHTML = myCity;
+//      }
+
+//         function getTemp5() {
+//             var myTemp = localStorage.getItem("Temperature");
+//             var tempF = (myTemp - 273.15) * 1.80 + 32;
+//             var a = parseInt(tempF);
+//     //  console.log(a);
+//             document.getElementById("theTemp5").innerHTML = a;       
+// }
+//         function getSky5(){
+//             var mySky = localStorage.getItem("Skys");
+//             document.getElementById("theSky5").innerHTML = mySky;
+//     }
+
+//         function getDate5(){
+//             // var myDate = localStorage.getItem("dateString");
+//            var myDate = (dateString);
+//             document.getElementById("theDate5").innerHTML = myDate;
+           
+//         }
 
 // Write to HTML Elements from Storage - One Day Dev
         function getCity(){
