@@ -79,16 +79,43 @@ $("#fiveDayForcast").on("click", function(event){
 
         .then(function(response) {
             for(var a = 0; a < 40; a++ ) {
+            
+            var markDate = (response.list[0].dt);
+            dateString = moment.unix(markDate).format("MM/DD/YYYY");
             localStorage.setItem("City", response.city.name);
             localStorage.setItem("Temperature", response.list[0].main.temp);
             localStorage.setItem("Skys", response.list[0].weather[0].description);
             localStorage.setItem("DateTime", response.list[0].dt_txt);
-            var markDate = (response.list[a].dt);
-            dateString = moment.unix(markDate).format("MM/DD/YYYY");
-            console.log(dateString);
-            console.log(response); 
             
-                debugger
+            var markDate1 = (response.list[8].dt);
+            dateString = moment.unix(markDate1).format("MM/DD/YYYY");
+            localStorage.setItem("Temperature1", response.list[8].main.temp);
+            localStorage.setItem("Skys1", response.list[8].weather[0].description);
+            localStorage.setItem("DateTime1", response.list[8].dt_txt);
+
+            var markDate2 = (response.list[16].dt);
+            dateString = moment.unix(markDate2).format("MM/DD/YYYY");
+            localStorage.setItem("Temperature2", response.list[16].main.temp);
+            localStorage.setItem("Skys2", response.list[16].weather[0].description);
+            localStorage.setItem("DateTime2", response.list[16].dt_txt);
+            
+            var markDate3 = (response.list[24].dt);
+            dateString = moment.unix(markDate3).format("MM/DD/YYYY");
+            localStorage.setItem("Temperature3", response.list[24].main.temp);
+            localStorage.setItem("Skys3", response.list[24].weather[0].description);
+            localStorage.setItem("DateTime3", response.list[24].dt_txt);
+
+            var markDate4 = (response.list[32].dt);
+            dateString = moment.unix(markDate4).format("MM/DD/YYYY");
+            localStorage.setItem("Temperature4", response.list[32].main.temp);
+            localStorage.setItem("Skys4", response.list[32].weather[0].description);
+            localStorage.setItem("DateTime4", response.list[32].dt_txt);
+           
+           
+            console.log(dateString);
+            console.log(response.list[a].dt_txt); 
+            // console.log(myArrayDays);
+                
             }
             getCity5();
             getTemp5();
@@ -97,6 +124,8 @@ $("#fiveDayForcast").on("click", function(event){
             
             
         });
+        // var myArrayDays = [];
+        //     myArrayDays.push(response.list[0], response.list[8], response.list[16], response.list[24], response.list[32]);
 });
 
 
