@@ -85,7 +85,7 @@ $("#fiveDayForcast").on("click", function(event){
     var zipCode = $("#sTerm").val();
     var city=$(this).attr("city.name");
     var APIKey = "73310b5faf4ada3a2aad465913f033e9";
-    var queryURL = "http://api.openweathermap.org/data/2.5/forecast?zip=" + zipCode + "&APPID=" + APIKey;
+    var queryURL = "https://api.openweathermap.org/data/2.5/forecast?zip=" + zipCode + "&APPID=" + APIKey;
 
 
         $.ajax({
