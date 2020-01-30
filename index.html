@@ -84,10 +84,11 @@ $("#fiveDayForcast").on("click", function(event){
             localStorage.setItem("Skys", response.list[0].weather[0].description);
             localStorage.setItem("DateTime", response.list[0].dt_txt);
             var markDate = (response.list[a].dt);
-            var dateString = moment.unix(markDate).format("MM/DD/YYYY");
+            dateString = moment.unix(markDate).format("MM/DD/YYYY");
             console.log(dateString);
             console.log(response); 
-           
+            
+                debugger
             }
             getCity5();
             getTemp5();
@@ -118,9 +119,10 @@ $("#fiveDayForcast").on("click", function(event){
     }
 
         function getDate5(){
-            var myDate = localStorage.getItem("DateTime");
+            // var myDate = localStorage.getItem("dateString");
+           var myDate = (dateString);
             document.getElementById("theDate5").innerHTML = myDate;
-            
+           
         }
 
 // Write to HTML Elements from Storage - One Day Dev
