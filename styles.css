@@ -17,9 +17,10 @@ h1 {
     /* margin-right: 0; */
   }
   .mainDiv{
-      background-color: lightskyblue;
+      /* background-color: lightskyblue; */
       /* padding-left: 25%;
       padding-right: 25%; */
+      background-color: white;
       margin-left: 25%;
       margin-right: 25%;
       border-radius: 25px;
