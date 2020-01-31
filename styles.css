@@ -50,3 +50,17 @@ h1 {
    padding-top: 10px;
    /* float: left; */
   }
+
+  .image{
+      float: right;
+      padding-right: 25px;
+      padding-top: 15px;
+      /* visibility: hidden; */
+        
+  }
+  #clouds{
+      visibility: hidden;
+  }
+  #lightRain{
+      visibility: hidden;
+  }

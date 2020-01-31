@@ -17,10 +17,16 @@
     </form><br>
 
     <div class="mainDiv">
+        <div class="image">
+          <img src = "cloudy_sky.png" id="clouds"> 
+          <img src = "lightrain.png" id="lightRain">
+        </div>
         <h1>The Weather in <span id="theCity"></span></h1>
         <h2>is currently <span id="theTemp"></span> degrees!</h2>
         <h2>Visibility:  <span id="theSky"></span></h2>
         <!-- <h2>Date: <span id="theDate"></span></h2> -->
+        
+        
     </div><br>
 
     <div class="fiveDayDiv">
@@ -255,6 +261,14 @@ $("#fiveDayForcast").on("click", function(event){
         function getSky(){
             var mySky = localStorage.getItem("Skys");
             document.getElementById("theSky").innerHTML = mySky;
+            
+            if(mySky === "overcast clouds"){
+               document.getElementById("clouds").style.visibility = "visible"; 
+               document.getElementById("lightRain").style.visibility = "hidden"
+            } else if (mySky === "light rain"){
+               document.getElementById("lightRain").style.visibility = "visible";
+               document.getElementById("clouds").style.visibility = "hidden"
+            } 
     }
 
         function getDate(){
